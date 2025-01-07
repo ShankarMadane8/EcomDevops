@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springboot-app-deployment
+  name: springboot-app-shankar
   labels:
     app: springboot-app
 spec:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: springboot-container
-          image: shankar888/springboot-k8s-demo:1.0 # Replace with your image name and version
+          image: shankar888/springboot-k8s-shankar:1.0 # Replace with your image name and version
           ports:
             - containerPort: 8181
 ---
