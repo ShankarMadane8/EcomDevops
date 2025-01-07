@@ -44,9 +44,12 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 echo 'Deploying the Docker container...'
-                bat '''
-                   docker run -d -p 9999:9999 --name ecom-container ${DOCKER_IMAGE,,}:${DOCKER_TAG}
-                '''
+                script {
+                    bat """
+                       docker rm -f ecom-container || echo "No existing container to remove"
+                       docker run -d -p 9999:9999 --name ecom-container ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}
+                    """
+                }
             }
         }
     }
