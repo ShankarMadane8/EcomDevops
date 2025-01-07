@@ -41,12 +41,14 @@ pipeline {
             }
         }
 
-       stage('Deploy Container') {
-           echo 'Deploying the Docker container...'
-           bat '''
-               docker run -d -p 8080:8080 --name ecom-container shankar888/springboot-k8s-demo:latest
-           '''
-       }
+        stage('Deploy Container') {
+            steps {
+                echo 'Deploying the Docker container...'
+                bat '''
+                    docker run -d -p 9999:9999 --name ecom-container ${DOCKER_IMAGE}:${DOCKER_TAG}
+                '''
+            }
+        }
     }
 
     post {
