@@ -45,7 +45,7 @@ pipeline {
             steps {
                 echo 'Deploying the Docker container...'
                 bat '''
-                    docker run -d -p 9999:9999 --name ecom-container ${DOCKER_IMAGE}:${DOCKER_TAG}
+                   docker run -d -p 9999:9999 --name ecom-container ${DOCKER_IMAGE,,}:${DOCKER_TAG}
                 '''
             }
         }
