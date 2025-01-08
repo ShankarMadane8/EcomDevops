@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-springboot-app # Updated name
+  name: springboot-sm-deployment
   labels:
-    app: my-springboot-app
+    app: springboot-sm-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: my-springboot-app
+      app: springboot-sm-app
   template:
     metadata:
       labels:
-        app: my-springboot-app
+        app: springboot-sm-app
     spec:
       containers:
-        - name: springboot-container
-          image: shankar888/springboot-k8s-shankar:1.0 # Update with your actual Docker image and tag
+        - name: springboot-sm-container
+          image: shankar888/springboot-k8s-sm:1.0 # Updated image name and tag
           ports:
             - containerPort: 8181
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-springboot-app-service # Updated service name
+  name: springboot-sm-service
 spec:
   type: ClusterIP
   selector:
-    app: my-springboot-app
+    app: springboot-sm-app
   ports:
     - protocol: TCP
       port: 8080
