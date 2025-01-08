@@ -23,8 +23,8 @@ public class CustomerController {
     @GetMapping("/getData")
     public ResponseEntity<?> getData(){
         HashMap<String,String> data= new HashMap<>();
-        data.put("name","shakar");
-        data.put("email","shakar@gmial.com");
+        data.put("name","kiran");
+        data.put("email","kiran@gmial.com");
         data.put("phone","8806325334");
         logger.info("data: {}", data);
         return ResponseEntity.ok( data);

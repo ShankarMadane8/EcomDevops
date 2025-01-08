@@ -3,9 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "shankar888/springboot-k8s-sm"
-        // Generate a unique tag based on the Git commit hash
-        DOCKER_TAG = "${GIT_COMMIT.substring(0, 7)}" // Using first 7 chars of commit hash
         K8S_DEPLOYMENT_FILE = "k8s-deployment.yaml"
+        VERSION_FILE = "version.txt" // You can store versioning information in a file in your repo
     }
 
     stages {
@@ -13,6 +12,26 @@ pipeline {
             steps {
                 echo "Cloning the repository..."
                 git branch: 'main', url: 'https://github.com/ShankarMadane8/EcomDevops.git'
+            }
+        }
+
+        stage('Get Current Version') {
+            steps {
+                echo "Fetching current version..."
+                script {
+                    // Read the current version from a file or DockerHub
+                    if (fileExists(VERSION_FILE)) {
+                        def version = readFile(VERSION_FILE).trim()
+                        echo "Current version: ${version}"
+                        // Increment the version (example: 1.0 -> 1.1)
+                        def (major, minor) = version.tokenize('.')
+                        minor = minor.toInteger() + 1
+                        env.DOCKER_TAG = "${major}.${minor}"
+                    } else {
+                        // If no version file exists, start from 1.0
+                        env.DOCKER_TAG = "1.0"
+                    }
+                }
             }
         }
 
@@ -27,7 +46,7 @@ pipeline {
             steps {
                 echo "Building Docker image..."
                 script {
-                    // Build Docker image with the unique tag
+                    // Build Docker image with the incremented tag
                     docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
                 }
             }
@@ -38,7 +57,7 @@ pipeline {
                 echo "Pushing Docker image to DockerHub..."
                 withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
                     script {
-                        // Push the image with the unique tag
+                        // Push the image with the incremented tag
                         docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push()
                     }
                 }
@@ -62,6 +81,16 @@ pipeline {
                 script {
                     bat "kubectl apply -f ${K8S_DEPLOYMENT_FILE}"
                     bat "kubectl rollout restart deployment springboot-sm-deployment" // Restart the deployment to apply new image
+                }
+            }
+        }
+
+        stage('Update Version File') {
+            steps {
+                echo "Updating version file..."
+                script {
+                    // Update the version file with the new version
+                    writeFile file: VERSION_FILE, text: env.DOCKER_TAG
                 }
             }
         }
