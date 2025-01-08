@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.HashMap;
+
 
 @RestController
 public class CustomerController {
@@ -16,5 +18,15 @@ public class CustomerController {
     public ResponseEntity<String> getInfo(){
         logger.info("Application is working fine........");
         return ResponseEntity.ok( "Kubernetes configuration is done");
+    }
+
+    @GetMapping("/getData")
+    public ResponseEntity<?> getData(){
+        HashMap<String,String> data= new HashMap<>();
+        data.put("name","shakar");
+        data.put("email","shakar@gmial.com");
+        data.put("phone","8806325334");
+        logger.info("data: {}", data);
+        return ResponseEntity.ok( data);
     }
 }
