@@ -30,10 +30,10 @@ public class CustomerController {
         return ResponseEntity.ok( data);
     }
 
-    @GetMapping("/gedata/1")
+    @GetMapping("/getData/1")
     public ResponseEntity<?> getDataUser(){
         HashMap<String,String> data= new HashMap<>();
-        data.put("name","Shankar");
+        data.put("name","Pallav");
         data.put("email","SHankar@gmial.com");
         data.put("phone","8806325334");
         logger.info("data: {}", data);
