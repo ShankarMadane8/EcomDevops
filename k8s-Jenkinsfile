@@ -43,6 +43,17 @@ pipeline {
         }
 
 
+         stage('Update Kubernetes Deployment File') {
+             steps {
+                        echo "Updating Kubernetes deployment file with new image..."
+                        script {
+                            // Replace the image name dynamically in the deployment YAML
+                            bat """
+                                sed -i 's|image: .*|image: ${DOCKER_IMAGE}:${DOCKER_TAG}|' ${K8S_DEPLOYMENT_FILE}
+                            """
+                        }
+             }
+         }
 
         stage('Deploy to Kubernetes') {
             steps {
