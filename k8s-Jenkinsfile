@@ -48,7 +48,7 @@ pipeline {
             steps {
                 echo "Deploying application to Kubernetes..."
                 script {
-                    sh "kubectl apply -f ${K8S_DEPLOYMENT_FILE}"
+                    bat "kubectl apply -f ${K8S_DEPLOYMENT_FILE}"
                 }
             }
         }
