@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "shankar888/springboot-k8s-sm"
-        DOCKER_TAG = "1.0"
+        // Generate a unique tag based on the Git commit hash
+        DOCKER_TAG = "${GIT_COMMIT.substring(0, 7)}" // Using first 7 chars of commit hash
         K8S_DEPLOYMENT_FILE = "k8s-deployment.yaml"
     }
 
@@ -26,6 +27,7 @@ pipeline {
             steps {
                 echo "Building Docker image..."
                 script {
+                    // Build Docker image with the unique tag
                     docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
                 }
             }
@@ -36,6 +38,7 @@ pipeline {
                 echo "Pushing Docker image to DockerHub..."
                 withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
                     script {
+                        // Push the image with the unique tag
                         docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push()
                     }
                 }
@@ -58,6 +61,7 @@ pipeline {
                 echo "Deploying application to Kubernetes..."
                 script {
                     bat "kubectl apply -f ${K8S_DEPLOYMENT_FILE}"
+                    bat "kubectl rollout restart deployment springboot-sm-deployment" // Restart the deployment to apply new image
                 }
             }
         }
