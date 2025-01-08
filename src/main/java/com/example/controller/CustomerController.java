@@ -29,4 +29,14 @@ public class CustomerController {
         logger.info("data: {}", data);
         return ResponseEntity.ok( data);
     }
+
+    @GetMapping("/gedata/1")
+    public ResponseEntity<?> getDataUser(){
+        HashMap<String,String> data= new HashMap<>();
+        data.put("name","Shankar");
+        data.put("email","SHankar@gmial.com");
+        data.put("phone","8806325334");
+        logger.info("data: {}", data);
+        return ResponseEntity.ok( data);
+    }
 }
