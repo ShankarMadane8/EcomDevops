@@ -1,7 +1,6 @@
 package com.example.service;
 
 import com.example.FieldMapping;
-import com.example.controller.CustomerController;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
@@ -19,13 +18,16 @@ import java.util.Map;
 
 @Service
 public class CacheService {
-
-    @Autowired
-    private CacheManager cacheManager; // Autowiring CacheManager directly
+    private final CacheManager cacheManager; // Autowiring CacheManager directly
 
     private Cache userCache;
 
     private static final Logger logger = LoggerFactory.getLogger(CacheService.class);
+
+    @Autowired
+    public CacheService(CacheManager cacheManager) {
+        this.cacheManager = cacheManager;
+    }
 
 
     @PostConstruct
@@ -42,7 +44,7 @@ public class CacheService {
             InputStream inputStream = getClass().getResourceAsStream("/data.json");
             List<Map<String, List<FieldMapping>>> data = objectMapper.readValue(
                     inputStream, new TypeReference<List<Map<String, List<FieldMapping>>>>() {});
-            System.out.println("userCache: "+userCache);
+
             Map<String, List<FieldMapping>> newMap =new HashMap<>();
             for (Map<String, List<FieldMapping>> map : data) {
                 newMap.putAll(map);
@@ -63,7 +65,6 @@ public class CacheService {
 
     // Retrieve data from the cache by key
     public List<FieldMapping> getCacheData(String key) {
-        System.out.println(getcacheAllData());
         if (userCache != null) {
             Cache.ValueWrapper valueWrapper = userCache.get(key);
             if (valueWrapper != null) {
@@ -80,6 +81,6 @@ public class CacheService {
                 return (Map<String, List<FieldMapping>>) valueWrapper.get();
             }
         }
-        return null;
+        return new HashMap<>();
     }
 }

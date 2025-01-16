@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 
 import java.util.HashMap;
 
@@ -21,7 +21,7 @@ public class CustomerController {
     }
 
     @GetMapping("/getData")
-    public ResponseEntity<?> getData(){
+    public ResponseEntity<Object> getData(){
         HashMap<String,String> data= new HashMap<>();
         data.put("name","kiran");
         data.put("email","kiran@gmial.com");
@@ -31,12 +31,12 @@ public class CustomerController {
     }
 
     @GetMapping("/getData/1")
-    public ResponseEntity<?> getDataUser(){
+    public ResponseEntity<Object> getDataUser(){
         HashMap<String,String> data= new HashMap<>();
         data.put("name","Pallav");
         data.put("email","SHankar@gmial.com");
         data.put("phone","8806325334");
         logger.info("data: {}", data);
-        return ResponseEntity.ok( data);
+        return ResponseEntity.ok(data);
     }
 }

@@ -11,9 +11,12 @@ import java.util.List;
 @RequestMapping("/cache")
 public class CacheController {
 
-    @Autowired
-    private  CacheService cacheService;
+    private final CacheService cacheService;
 
+    @Autowired
+    public CacheController(CacheService cacheService) {
+        this.cacheService = cacheService;
+    }
 
 
     // Endpoint to load cache data from the file

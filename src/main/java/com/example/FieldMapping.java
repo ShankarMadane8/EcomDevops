@@ -38,4 +38,14 @@ public class FieldMapping {
     public void setIsRequired(String isRequired) {
         this.isRequired = isRequired;
     }
+
+    @Override
+    public String toString() {
+        return "FieldMapping{" +
+                "fieldName='" + fieldName + '\'' +
+                ", sourceField='" + sourceField + '\'' +
+                ", dataType='" + dataType + '\'' +
+                ", isRequired='" + isRequired + '\'' +
+                '}';
+    }
 }
