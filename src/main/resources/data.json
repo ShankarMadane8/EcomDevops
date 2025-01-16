@@ -1,0 +1,40 @@
+[
+  {
+    "EmployeeData": [
+      {
+        "fieldName": "name",
+        "sourceField": "employee_name",
+        "dataType": "String",
+        "isRequired": true
+      },
+      {
+        "fieldName": "age",
+        "sourceField": "employee_age",
+        "dataType": "Integer",
+        "isRequired": false
+      }
+    ]
+  },
+  {
+    "DepartmentData": [
+      {
+        "fieldName": "departmentId",
+        "sourceField": "dept_id",
+        "dataType": "String",
+        "isRequired": true
+      },
+      {
+        "fieldName": "departmentName",
+        "sourceField": "dept_name",
+        "dataType": "String",
+        "isRequired": false
+      },
+      {
+        "fieldName": "manager",
+        "sourceField": "dept_manager",
+        "dataType": "String",
+        "isRequired": true
+      }
+    ]
+  }
+]
