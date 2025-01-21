@@ -7,6 +7,16 @@ public class FieldMapping {
     private String dataType;
     private String isRequired;
 
+    public FieldMapping(String fieldName, String sourceField, String dataType, String isRequired) {
+        this.fieldName = fieldName;
+        this.sourceField = sourceField;
+        this.dataType = dataType;
+        this.isRequired = isRequired;
+    }
+
+    public FieldMapping() {
+    }
+
     public String getFieldName() {
         return fieldName;
     }
