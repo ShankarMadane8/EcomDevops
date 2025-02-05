@@ -7,8 +7,20 @@
 #===================
 #Render
 
-FROM openjdk:17
-WORKDIR /app
-COPY target/springboot-k8s-demo.jar app.jar
-EXPOSE 8181
-ENTRYPOINT ["java", "-jar", "app.jar"]
+#
+# Build stage
+#
+FROM maven:3.8.5-openjdk-17 AS build
+
+COPY . .
+RUN mvn clean package -DskipTests
+
+#
+# Package stage
+#
+FROM openjdk:17-jdk-slim
+
+COPY --from=build /target/springboot-k8s-demo.jar demo.jar
+
+EXPOSE 8182
+ENTRYPOINT ["java", "-jar", "demo.jar"]
