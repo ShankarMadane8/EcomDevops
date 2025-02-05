@@ -17,7 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = EcomDevopsApplication.class)
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 class StudentServiceTest {
 
     @Autowired
