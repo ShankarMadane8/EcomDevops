@@ -1,0 +1,14 @@
+type Query {
+    getStudentById(id: ID!): Student
+}
+
+type Student {
+    id: ID!
+    name: String!
+    addresses: [Address!]!
+}
+
+type Address {
+    city: String!
+    state: String!
+}

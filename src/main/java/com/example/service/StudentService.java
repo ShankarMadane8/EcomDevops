@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
@@ -40,6 +41,10 @@ public class StudentService {
         List<Address> addressList = addressRepository.findAll();
         logger.info("addresses :: {} ",addressList);
         return addressList;
+    }
+
+    public Optional<Student> getStudentById(Long id) {
+        return studentRepository.findById(id);
     }
 }
 
