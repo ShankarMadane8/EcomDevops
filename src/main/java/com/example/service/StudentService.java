@@ -1,6 +1,7 @@
 package com.example.service;
 
 
+import com.example.annotation.LogExecutionTime;
 import com.example.entity.Address;
 import com.example.entity.Student;
 import com.example.repository.AddressRepository;
@@ -27,12 +28,14 @@ public class StudentService {
     }
 
 
+    @LogExecutionTime
     public List<Student> getAllStudents() {
         List<Student> studentList = studentRepository.findAll();
         logger.info("students :: {}",studentList);
         return studentList;
     }
 
+    @LogExecutionTime
     public List<Address> getAllAddress() {
         List<Address> addressList = addressRepository.findAll();
         logger.info("addresses :: {} ",addressList);
