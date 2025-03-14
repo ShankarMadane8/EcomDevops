@@ -36,7 +36,6 @@ public class CacheService {
         loadCacheData();// Initializing userCache after CacheManager is injected
     }
 
-
     public void loadCacheData() {
         logger.info("loadCacheData:: START");
         try {
