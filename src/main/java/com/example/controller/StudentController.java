@@ -28,5 +28,6 @@ public class StudentController {
     public List<Address> getAddress() {
         return studentService.getAllAddress();
     }
+
 }
 
