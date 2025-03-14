@@ -13,13 +13,14 @@ public class CacheController {
 
     private final CacheService cacheService;
 
+
     @Autowired
     public CacheController(CacheService cacheService) {
         this.cacheService = cacheService;
     }
 
 
-    // Endpoint to load cache data from the file
+
     @PostMapping("/load")
     public String loadCache() {
         cacheService.loadCacheData();
