@@ -12,5 +12,4 @@ public class EcomDevopsApplication {
 		SpringApplication.run(EcomDevopsApplication.class, args);
 	}
 
-
 }
