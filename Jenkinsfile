@@ -47,7 +47,7 @@ pipeline {
                 script {
                     bat """
                        docker rm -f ecom-container || echo "No existing container to remove"
-                       docker run -d -p 9999:8181 --name ecom-container ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}
+                       docker run -d -p 8182:9999 --name ecom-container ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}
                     """
                 }
             }
