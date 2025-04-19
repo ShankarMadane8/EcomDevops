@@ -18,7 +18,7 @@ spec:
         - name: springboot-sm-container
           image: shankar888/springboot-k8s-sm:1.0 # Updated image name and tag
           ports:
-            - containerPort: 8181
+            - containerPort: 8182
 ---
 apiVersion: v1
 kind: Service
@@ -31,4 +31,4 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
-      targetPort: 8181
+      targetPort: 8182
