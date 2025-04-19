@@ -91,7 +91,7 @@ pipeline {
         script {
             bat '''
                 start /B cmd /c "minikube dashboard --url > dashboard-url.txt 2>&1"
-                timeout /t 5
+                ping -n 6 127.0.0.1 > nul
                 start /B cmd /c "kubectl port-forward -n kubernetes-dashboard service/kubernetes-dashboard 4444:80"
             '''
         }
