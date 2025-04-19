@@ -85,19 +85,6 @@ pipeline {
             }
         }
 
-        stage('Start Minikube Dashboard') {
-    steps {
-        echo "Starting Minikube Dashboard on port 4444..."
-        script {
-            bat '''
-                start /B cmd /c "minikube dashboard --url > dashboard-url.txt 2>&1"
-                ping -n 6 127.0.0.1 > nul
-                start /B cmd /c "kubectl port-forward -n kubernetes-dashboard service/kubernetes-dashboard 4444:80"
-            '''
-        }
-    }
-}
-
         stage('Update Version File') {
             steps {
                 echo "Updating version file..."

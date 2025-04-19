@@ -30,6 +30,6 @@ spec:
     app: springboot-sm-app
   ports:
     - protocol: TCP
-      port: 9999
+      port: 8182
       targetPort: 8182
       nodePort: 31555
