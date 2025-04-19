@@ -32,3 +32,4 @@ spec:
     - protocol: TCP
       port: 9999
       targetPort: 8182
+      nodePort: 5555
