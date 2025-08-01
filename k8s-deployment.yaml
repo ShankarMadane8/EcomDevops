@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: springboot-sm-container
-          image: shankar888/springboot-k8s-sm:1.28 # Updated image name and tag
+          image: shankar888/springboot-k8s-sm:1.0 # Updated image name and tag
           ports:
             - containerPort: 8182
 ---
