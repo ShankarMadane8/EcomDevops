@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -30,9 +31,10 @@ public class CustomerController {
         return ResponseEntity.ok( data);
     }
 
-    @GetMapping("/getData/1")
-    public ResponseEntity<Object> getDataUser(){
+    @GetMapping("/getData/{id}")
+    public ResponseEntity<Object> getDataUser(@PathVariable int id){
         HashMap<String,String> data= new HashMap<>();
+        data.put("id",""+id);
         data.put("name","Pallav");
         data.put("email","SHankar@gmial.com");
         data.put("phone","8806325334");
